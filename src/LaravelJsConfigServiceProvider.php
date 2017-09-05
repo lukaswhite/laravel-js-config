@@ -21,7 +21,7 @@ class LaravelJsConfigServiceProvider extends ServiceProvider
 
         $this->publishes([
             self::CONFIG_PATH => $this->app['path.config'] . '/' . self::CONFIG_NAME . '.php',
-        ], 'config');
+        ], 'laravel-js-config');
     }
 
     public function register()
