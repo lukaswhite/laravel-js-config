@@ -1,4 +1,18 @@
 {
+    "name": "kkszymanowski/laravel-js-config",
+    "description": "Publish Laravel configuration to JS",
+    "keywords": ["laravel", "config", "javascript"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/kkszymanowski/laravel-js-config/issues",
+        "source": "https://github.com/kkszymanowski/laravel-js-config"
+    },
+    "authors": [
+        {
+            "name": "Kuba Szymanowski",
+            "email": "kuba.szymanowski@inf24.pl"
+        }
+    ],
     "require": {
         "php": "7.*",
         "illuminate/support": "~5.2",
