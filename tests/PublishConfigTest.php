@@ -2,12 +2,12 @@
 
 namespace Tests;
 
-use BadMethodCallException;
 use Closure;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as RepositoryContract;
-use Illuminate\Contracts\Filesystem\Filesystem as FilesystemContract;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Filesystem\Filesystem as IlluminateFilesystem;
 use InvalidArgumentException;
 use LaravelJsConfig\LaravelJsConfigServiceProvider;
 use LaravelJsConfig\PublishConfig;
@@ -128,98 +128,22 @@ class PublishConfigTest extends TestCase
     }
 }
 
-class Filesystem implements FilesystemContract
+class Filesystem extends IlluminateFilesystem
 {
 
     protected $files = [];
 
-    public function put($path, $contents, $visibility = null)
+    public function put($path, $contents, $lock = false)
     {
         $this->files[$path] = $contents;
     }
 
-    public function get($path)
+    public function get($path, $lock = false)
     {
-        return $this->files[$path];
-    }
+        if (isset($this->files[$path])) {
+            return $this->files[$path];
+        }
 
-    public function exists($path)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function getVisibility($path)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function setVisibility($path, $visibility)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function prepend($path, $data)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function append($path, $data)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function delete($paths)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function copy($from, $to)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function move($from, $to)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function size($path)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function lastModified($path)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function files($directory = null, $recursive = false)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function allFiles($directory = null)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function directories($directory = null, $recursive = false)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function allDirectories($directory = null)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function makeDirectory($path)
-    {
-        throw new BadMethodCallException();
-    }
-
-    public function deleteDirectory($directory)
-    {
-        throw new BadMethodCallException();
+        throw new FileNotFoundException("File does not exist at path {$path}");
     }
 }

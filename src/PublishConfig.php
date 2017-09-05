@@ -4,7 +4,7 @@ namespace LaravelJsConfig;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\Filesystem;
 use InvalidArgumentException;
 
 class PublishConfig extends Command
