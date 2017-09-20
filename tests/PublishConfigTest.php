@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace LaravelJsConfig\Tests;
 
 use Closure;
 use Illuminate\Console\Command;

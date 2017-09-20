@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace LaravelJsConfig\Tests;
 
 class DefaultConfigurationTest extends TestCase
 {

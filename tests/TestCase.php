@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace LaravelJsConfig\Tests;
 
 use LaravelJsConfig\LaravelJsConfigServiceProvider;
 
@@ -12,6 +12,4 @@ class TestCase extends \Orchestra\Testbench\TestCase
             LaravelJsConfigServiceProvider::class
         ];
     }
-
-
 }
