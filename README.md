@@ -44,3 +44,31 @@ Can be either a specific key(like `app.env`) or a group of keys(like `auth.defau
 ```
 php artisan config:js
 ```
+
+#### Integration with Laravel Mix
+
+To publish the configuration every time the Mix build starts follow these steps:
+1. Install `webpack-shell-plugin`: 
+    ```
+    # NPM
+    npm install webpack-shell-plugin --save-dev
+    
+    # Yarn
+    yarn add webpack-shell-plugin 
+    ```
+2. In your `webpack.mix.js` file require the plugin
+    ``` 
+    const WebpackShellPlugin = require('webpack-shell-plugin');
+    ```
+    and register it to run before each build
+    ``` 
+    mix.webpackConfig({
+        plugins: [
+            new WebpackShellPlugin({
+                onBuildStart: ['php artisan config:js'],
+            }),
+        ],
+    });
+    ```
+    
+If you're using the `watch` option in Laravel Mix and you want to refresh the published configuration you can either restart the build or run `php artisan config:js` in another terminal. 
