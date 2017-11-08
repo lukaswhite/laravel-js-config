@@ -36,12 +36,12 @@ class PublishConfig extends Command
     public function handle()
     {
         if($this->laravel->configurationIsCached()) {
-            $this->warn('Configuration has been cached. I\'ll assume you know what you\'re doing.');
+            $this->warn("\nConfiguration has been cached. I'll assume you know what you're doing.");
         }
 
         $path = $this->writeConfig($this->fetchConfig());
 
-        $this->info("Configuration published successfully to $path");
+        $this->info("\nConfiguration published successfully to $path\n");
     }
 
     protected function fetchConfig() : array
