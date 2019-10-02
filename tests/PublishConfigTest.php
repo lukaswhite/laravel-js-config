@@ -21,7 +21,7 @@ class PublishConfigTest extends TestCase
     /** @var  Filesystem */
     protected $filesystem;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -39,8 +39,8 @@ class PublishConfigTest extends TestCase
         $command = new PublishConfig($config, $this->filesystem);
         $output = $this->runCommand($command);
 
-        $this->assertContains('Configuration published successfully to foo', $output);
-        $this->assertContains('Do not edit', $this->filesystem->get('foo'));
+        $this->assertStringContainsString('Configuration published successfully to foo', $output);
+        $this->assertStringContainsString('Do not edit', $this->filesystem->get('foo'));
     }
 
     public function test_it_publishes_specific_key()
@@ -57,7 +57,7 @@ class PublishConfigTest extends TestCase
 
         $this->runCommand(new PublishConfig($config, $this->filesystem));
 
-        $this->assertContains('export default {"app":{"env":"local"}}', $this->filesystem->get('foo'));
+        $this->assertStringContainsString('export default {"app":{"env":"local"}}', $this->filesystem->get('foo'));
     }
 
     public function test_it_warns_about_cached_configuration()
@@ -70,7 +70,7 @@ class PublishConfigTest extends TestCase
 
         $output = $this->runCommand(new PublishConfig($config, $this->filesystem), $configurationIsCached = true);
 
-        $this->assertContains('Configuration has been cached', $output);
+        $this->assertStringContainsString('Configuration has been cached', $output);
     }
 
     public function test_it_notifies_of_missing_key()
